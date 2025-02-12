@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=2340, initial-scale=1.0">
+    <title>Valentine's Quiz</title>
+    <style>
+        body {
+            background-color: #ffdde1;
+            color: #d63384;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        #gif-container img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 20px;
+        }
+        .button-container {
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn {
+            position: absolute;
+            font-size: 1.5rem;
+            padding: 10px;
+            background-color: #ff4081;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #yes {
+            width: 100px;
+            height: 100px;
+        }
+        #no {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="question">Will you be my Valentine?</h1>
+    <div id="gif-container">
+        <img id="gif" src="dob-dob-dob-rizz.gif" alt="gif">
+    </div>
+    <div class="button-container">
+        <button id="yes" class="btn" onclick="nextQuestion(true)">YES</button>
+        <button id="no" class="btn" onclick="nextQuestion(false)">NO</button>
+    </div>
+
+    <script>
+        const questions = [
+            "Will you be my Valentine?",
+            "Are you sure?",
+            "Really really sure?",
+            "Why no? Please??",
+            "Please, please, pleasee???",
+            "Pretty please?????????",
+            "Even if I'm begging you to??? :'(",
+            "I'm begging you my princess??? :((((((",
+            "My cootiepatootie sweet princess????? T^T",
+        ];
+        
+        const gifs = [
+            "dob-dob-dob-rizz.gif",
+            "cat-2.gif",
+            "cat-3.gif",
+            "cat-4.gif",
+            "cat-5.gif",
+            "cat-6.gif",
+            "cat-7.gif",
+            "cat-8.gif",
+            "cat-9.gif",
+            "howls-moving-castle-surprise-hug.gif"
+        ];
+        
+        let currentQuestion = 0;
+        const yesBtn = document.getElementById("yes");
+        const noBtn = document.getElementById("no");
+        const questionText = document.getElementById("question");
+        const gifImg = document.getElementById("gif");
+
+        function preloadImages() {
+            gifs.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+        
+        function nextQuestion(isYes) {
+            if (isYes || currentQuestion === questions.length - 1) {
+                if (currentQuestion === questions.length - 1) {
+                    document.body.innerHTML = '<h1>Thank you, I love you so much pookie <3</h1>' +
+                                              '<img src="' + gifs[9] + '" alt="final gif" style="width: 80%;">';
+                } else {
+                    currentQuestion++;
+                    questionText.textContent = questions[currentQuestion];
+                    gifImg.src = gifs[currentQuestion];
+                    adjustButtonSize();
+                }
+            } else {
+                randomizeNoPosition();
+                shrinkNoButton();
+                growYesButton();
+            }
+        }
+        
+        function adjustButtonSize() {
+            let newSize = 100 + (currentQuestion * 30);
+            yesBtn.style.width = `${newSize}px`;
+            yesBtn.style.height = `${newSize}px`;
+        }
+        
+        function randomizeNoPosition() {
+            let x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            let y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50);
+            noBtn.style.position = "absolute";
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+        
+        function shrinkNoButton() {
+            let newSize = Math.max(20, noBtn.offsetWidth - 10);
+            noBtn.style.width = `${newSize}px`;
+            noBtn.style.height = `${newSize}px`;
+        }
+        
+        function growYesButton() {
+            let newSize = Math.min(window.innerWidth, yesBtn.offsetWidth + 50);
+            yesBtn.style.width = `${newSize}px`;
+            yesBtn.style.height = `${newSize}px`;
+        }
+        
+        preloadImages();
+    </script>
+</body>
+</html>
