@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1080, height=2340, initial-scale=1.0">
+    <meta name="viewport" content="width=1080, height=2340, user-scalable=no">
     <title>Valentine's Quiz</title>
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 1080px;
+            height: 2340px;
+            overflow: hidden;
             background-color: #ffdde1;
             color: #d63384;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            width: 100vw;
             text-align: center;
             font-family: Arial, sans-serif;
-            overflow: hidden;
         }
         #gif-container img {
             max-width: 80%;
